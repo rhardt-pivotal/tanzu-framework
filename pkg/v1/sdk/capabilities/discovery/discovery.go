@@ -5,7 +5,8 @@ package discovery
 
 import (
 	"fmt"
-
+	"github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/log"
+	_ "github.com/vmware-tanzu/tanzu-framework/pkg/v1/tkg/log"
 	"k8s.io/client-go/discovery"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/rest"
@@ -13,11 +14,14 @@ import (
 
 // NewClusterQueryClientForConfig returns a new cluster query builder for a REST config.
 func NewClusterQueryClientForConfig(config *rest.Config) (*ClusterQueryClient, error) {
+	log.Info("NewClusterQueryClientForConfig")
 	discoveryClient, err := discovery.NewDiscoveryClientForConfig(config)
+	log.Infof("discoveryClient: %v", discoveryClient)
 	if err != nil {
 		return nil, err
 	}
 	dynamicClient, err := dynamic.NewForConfig(config)
+	log.Infof("dynamicClient: %v", dynamicClient)
 	if err != nil {
 		return nil, err
 	}

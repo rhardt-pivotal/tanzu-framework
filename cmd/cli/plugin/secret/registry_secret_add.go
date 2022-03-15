@@ -55,6 +55,7 @@ func init() {
 }
 
 func registrySecretAdd(cmd *cobra.Command, args []string) error {
+	log.Info("\n **PATCHED SECRET ADD")
 	registrySecretOp.SecretName = args[0]
 
 	password, err := extractPassword()
